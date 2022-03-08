@@ -30,6 +30,7 @@ public:
                 q.pop();
                 temp->next = place;
                 place = temp;
+                // catch part -> first we insert right node then left node
                 if(temp->right){
                     q.push(temp->right);
                 }
