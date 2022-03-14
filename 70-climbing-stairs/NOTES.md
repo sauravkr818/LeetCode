@@ -1,0 +1,2 @@
+- Go and revise DP lecture 2 and 3 in the notes.
+- Good problem for starting dp.
