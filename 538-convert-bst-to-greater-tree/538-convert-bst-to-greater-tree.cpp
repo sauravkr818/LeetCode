@@ -11,26 +11,20 @@
  */
 class Solution {
 public:
-    int gsum = 0;
-    int prev = 0;
-    int f(TreeNode* root, int &sum,int &a, int &b){
+    void f(TreeNode* root, int &sum){
         // base cases
-        if(root == NULL) return 0;
+        if(root == NULL) return;
         
-        a = f(root->right,sum,a,b);
-        gsum = prev + root->val;
-        prev = gsum;
-        sum = root->val + a;
-        root->val = gsum;
-        b = f(root->left,sum,a,b);
-        return sum;
+        f(root->right,sum);
+        sum += root->val;
+        root->val = sum;
+        f(root->left,sum);
     }
     
     TreeNode* convertBST(TreeNode* root) {
         int sum = 0;
         TreeNode* temp = root;
-        int a = 0, b = 0;
-        f(root,sum,a,b);
+        f(root,sum);
         return temp;
     }
 };
