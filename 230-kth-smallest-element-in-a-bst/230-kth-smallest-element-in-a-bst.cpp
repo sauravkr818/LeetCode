@@ -12,30 +12,21 @@
 class Solution {
 public:
     int count = 0;
-    int i = 0;
-    bool visit = false;
+    //bool visit = false;
     void f(TreeNode* root, int &k){
-        if(k == 0) return;
-        if(root == NULL) {
-            visit = true;
-            return;
-        }
-        if(visit && root->left)f(root->left,k);
-        else f(root->left,k);
         
         if(k == 0) return;
+        
+        if(root == NULL) {
+            return;
+        }
+        f(root->left,k);
         
         if(root && k != 0){
             count = root->val;
-            cout<<count<<" ";
             k--;
-            cout<<k<<" ";
-            cout<<endl;
         }
-        
-        
-        if(visit && root->right) f(root->right,k);
-        else f(root->right,k);
+        f(root->right,k);
     }
     
     int kthSmallest(TreeNode* root, int k) {
