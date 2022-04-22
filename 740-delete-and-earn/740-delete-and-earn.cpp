@@ -1,17 +1,23 @@
 class Solution {
 public:
+    
+    // unordered_set<int>s;
+    int dp[10001];
+    int f(vector<int>&arr,int i){
+        
+        if(i>=arr.size()) return 0;
+        if(dp[i]!=-1) return dp[i];
+        return dp[i] = max(arr[i]+f(arr,i+2),f(arr,i+1));
+        
+        
+    }
     int deleteAndEarn(vector<int>& nums) {
+        memset(dp,-1,sizeof dp);
+        vector<int>arr(10001,0);
+        for(auto it: nums){
+            arr[it] += it;
+        }
         int n = nums.size();
-        vector<int>freq(10001,0);
-        for(int i=0;i<n;++i){
-            freq[nums[i]]++;
-        }
-        int cost = 0, max_cost = 0;
-        for(int i=1;i<10001;++i){
-            int val = max_cost + freq[i]*i;
-            max_cost = max(max_cost,cost);
-            cost = val;
-        }
-        return max(cost,max_cost);
+        return f(arr,0);
     }
 };
