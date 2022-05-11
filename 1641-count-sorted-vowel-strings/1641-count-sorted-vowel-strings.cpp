@@ -28,9 +28,20 @@ public:
     }
     
     int countVowelStrings(int n) {
-        vector<string>ans;
-        string temp;
-        permute(temp,n,ans,0);
-        return ans.size();
+        // vector<string>ans;
+        // string temp;
+        // permute(temp,n,ans,0);
+        // return ans.size();
+        
+        int a=1, e=1, i=1, o=1, u=1;
+        
+        while(--n){
+            o += u;
+            i += o;
+            e += i;
+            a += e;
+        }
+        
+        return a+e+i+o+u;
     }
 };
