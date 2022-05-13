@@ -19,28 +19,21 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        if(!root) return root;
+        if(root == NULL) return NULL;
         queue<Node*>q;
         q.push(root);
-        while(!q.empty()){
+        while(q.empty() == false){
+            Node* temp1 = NULL;
             int n = q.size();
-            Node* place = NULL;
-            for(int i = 0;i<n;i++){
-                Node* temp = q.front();
+            for(int i=0;i<n;i++){
+                Node* temp2 = q.front();
                 q.pop();
-                temp->next = place;
-                place = temp;
-                // catch part -> first we insert right node then left node
-                if(temp->right){
-                    q.push(temp->right);
-                }
-                if(temp->left){
-                    q.push(temp->left);
-                }
-                
+                temp2->next = temp1;
+                temp1 = temp2;
+                if(temp2->right) q.push(temp2->right);
+                if(temp2->left) q.push(temp2->left);
             }
         }
-        
         return root;
     }
 };
