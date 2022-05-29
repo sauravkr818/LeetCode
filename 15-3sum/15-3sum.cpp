@@ -1,5 +1,8 @@
 class Solution {
 public:
+    // Two-pointers approach
+    // Time - O(n*n)
+    // space - O(m) - ans array that is returned at last;
     vector<vector<int>> threeSum(vector<int>& nums) {
         int n = nums.size();
         vector<vector<int>>ans;
@@ -7,6 +10,7 @@ public:
         sort(nums.begin(),nums.end());
         for(int i=0;i<n-2;i++){
             int a = nums[i];
+            if(a>0) break;
             // a+b+c = 0;
             // therefore b+c = -a which is a two-sum problem
             if (i == 0 || (i > 0 && nums[i] != nums[i-1])) {
