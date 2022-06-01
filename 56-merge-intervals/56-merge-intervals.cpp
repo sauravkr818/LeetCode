@@ -9,9 +9,7 @@ public:
             int val = ans.size();
             vector<int>temp = matrix[i];
             if(ans[val-1][1]>=matrix[i][0] && ans[val-1][1]>=matrix[i][1]){
-                // ans.pop_back();
-                // vector<int>t = {};
-                // ans.push_back()
+                continue;
             }
             else if(ans[val-1][1]>=matrix[i][0] && ans[val-1][1]<matrix[i][1]){
                 vector<int>t = {ans[val-1][0],matrix[i][1]};
