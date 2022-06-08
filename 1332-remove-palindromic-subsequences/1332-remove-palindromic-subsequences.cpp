@@ -20,15 +20,15 @@ public:
         return dp[n][m];
     }
     int removePalindromeSub(string s) {
-        // string t = s;reverse(s.begin(),s.end());
-        // int ans = lcs(s,t);
-        // cout<<lcs(s,t)<<endl;
-        // return ans == s.size() ? 1 : 2;
+        string t = s;reverse(s.begin(),s.end());
+        int ans = lcs(s,t);
+        cout<<lcs(s,t)<<endl;
+        return ans == s.size() ? 1 : 2;
         
-        string st=s;
-        reverse(st.begin(),st.end());
-        if(st==s){
-            return 1;
-        }return 2;
+        // string st=s;
+        // reverse(st.begin(),st.end());
+        // if(st==s){
+        //     return 1;
+        // }return 2;
     }
 };
