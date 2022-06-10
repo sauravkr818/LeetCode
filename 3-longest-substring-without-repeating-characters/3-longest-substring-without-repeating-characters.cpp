@@ -12,7 +12,7 @@ public:
                 mp.insert(s[i]);
                 i++;
             }
-            cout<<i<<" "<<j<<endl;
+            
             max_l = max(max_l, i-j);
             
             if(i == n) break;
@@ -22,8 +22,6 @@ public:
                 j++;
             }
             j += 1;
-            cout<<i<<" "<<j<<endl;
-            
         }
         return max_l;
     }
