@@ -25,27 +25,57 @@ public:
         // return (int) f(n-1,m-1,word1,word2,dp);
         
         
-        vector<vector<double>>dp(n+1, vector<double>(m+1,0));
+        
+        // tabulation
+        
+//         vector<vector<double>>dp(n+1, vector<double>(m+1,0));
+        
+//         for(int j=0;j<=m;j++){
+//             dp[0][j] = j;
+//         }
+        
+//         for(int i=0;i<=n;i++){
+//             dp[i][0] = i;
+//         }
+        
+        
+        
+//         for(int i=1;i<=n;i++){
+//             for(int j=1;j<=m;j++){
+//                 if(s1[i-1] == s2[j-1]) dp[i][j] = 0 + dp[i-1][j-1];
+//                 else{
+//                     dp[i][j] = min( 1 + dp[i][j-1], 
+//                                    min( 1 + dp[i-1][j], 1 + dp[i-1][j-1] ));
+//                 }
+//             }
+//         }
+//         return dp[n][m];
+        
+        vector<int>prev(m+1,0), cur(m+1,0);
         
         for(int j=0;j<=m;j++){
-            dp[0][j] = j;
+            prev[j] = j;
         }
         
-        for(int i=0;i<=n;i++){
-            dp[i][0] = i;
-        }
+        // instead of this for loop writing cur[0] = n;
+        // for(int i=0;i<=n;i++){
+        //     cur[0] = i;
+        // }
+        // cur[0] = n; 
         
         
         
         for(int i=1;i<=n;i++){
+            cur[0] = i;
             for(int j=1;j<=m;j++){
-                if(s1[i-1] == s2[j-1]) dp[i][j] = 0 + dp[i-1][j-1];
+                if(s1[i-1] == s2[j-1]) cur[j] = 0 + prev[j-1];
                 else{
-                    dp[i][j] = min( 1 + dp[i][j-1], 
-                                   min( 1 + dp[i-1][j], 1 + dp[i-1][j-1] ));
+                    cur[j] = min( 1 + cur[j-1], 
+                                   min( 1 + prev[j], 1 + prev[j-1] ));
                 }
             }
+            prev = cur;
         }
-        return dp[n][m];
+        return prev[m];
     }
 };
