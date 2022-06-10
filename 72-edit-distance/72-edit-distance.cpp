@@ -18,9 +18,9 @@ public:
     }
     
     
-    int minDistance(string s1, string s2) {
-        int n = s1.size();
-        int m = s2.size();
+    int minDistance(string s, string t) {
+        // int n = s1.size();
+        // int m = s2.size();
         // vector<vector<double>>dp(n, vector<double>(m,-1));
         // return (int) f(n-1,m-1,word1,word2,dp);
         
@@ -51,31 +51,42 @@ public:
 //         }
 //         return dp[n][m];
         
-        vector<int>prev(m+1,0), cur(m+1,0);
+//         vector<int>prev(m+1,0), cur(m+1,0);
         
-        for(int j=0;j<=m;j++){
-            prev[j] = j;
-        }
+//         for(int j=0;j<=m;j++){
+//             prev[j] = j;
+//         }
         
-        // instead of this for loop writing cur[0] = n;
-        // for(int i=0;i<=n;i++){
-        //     cur[0] = i;
-        // }
-        // cur[0] = n; 
+//         for(int i=1;i<=n;i++){
+//             cur[0] = i; // see notes of DP-33
+//             for(int j=1;j<=m;j++){
+//                 if(s1[i-1] == s2[j-1]) cur[j] = 0 + prev[j-1];
+//                 else{
+//                     cur[j] = min( 1 + cur[j-1], 
+//                                    min( 1 + prev[j], 1 + prev[j-1] ));
+//                 }
+//             }
+//             prev = cur;
+//         }
+//         return prev[m];
         
-        
-        
-        for(int i=1;i<=n;i++){
-            cur[0] = i;
-            for(int j=1;j<=m;j++){
-                if(s1[i-1] == s2[j-1]) cur[j] = 0 + prev[j-1];
-                else{
-                    cur[j] = min( 1 + cur[j-1], 
-                                   min( 1 + prev[j], 1 + prev[j-1] ));
-                }
+        int n1=s.size();
+        int n2=t.size();
+        vector<int>v(n2+1,0);
+        for(int i=1;i<=n2;i++)v[i]=i;
+    
+        for(int i=1;i<=n1;i++)
+        {
+            for(int j=n2;j>=1;j--)
+            {
+               if(s[i-1]==t[j-1])v[j]=v[j-1];
+               else v[j]=min(v[j],v[j-1]);
             }
-            prev = cur;
-        }
-        return prev[m];
+            v[0]=i;
+            for(int j=1;j<=n2;j++)
+            if(s[i-1]!=t[j-1])v[j]=min(v[j],v[j-1])+1;
+       
+         }
+       return v[n2];
     }
 };
