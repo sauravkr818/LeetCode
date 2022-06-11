@@ -66,6 +66,9 @@ public:
 //     }
     
     
+    // 2nd try
+    // recursion + memoization
+    
     int f(int i, vector<int>&nums, vector<int>&dp){
         // base cases
         
