@@ -1,9 +1,9 @@
 class Solution {
 public:
-     int furthestBuilding(vector<int>& A, int bricks, int ladders) {
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
         priority_queue<int> pq;
-        for (int i = 0; i < A.size() - 1; i++) {
-            int d = A[i + 1] - A[i];
+        for (int i = 0; i < heights.size() - 1; i++) {
+            int d = heights[i + 1] - heights[i];
             if (d > 0)
                 pq.push(-d);
             if (pq.size() > ladders) {
@@ -13,6 +13,6 @@ public:
             if (bricks < 0)
                 return i;
         }
-        return A.size() - 1;
+        return heights.size() - 1;
     }
 };
