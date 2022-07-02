@@ -38,21 +38,36 @@ public:
         
 //         return dp[0][-1+1];
         
-        vector<int>next(n+1,0),cur(n+1,0);
-        for(int ind = n-1; ind>=0;ind--){
-            for(int prev_ind = ind-1; prev_ind>=-1;prev_ind--){
-                int not_take = 0; // not_take case
-                not_take = 0 + next[prev_ind+1];
-
-                int take = 0; // take case
-                if(prev_ind == -1 || nums[ind]>nums[prev_ind]){
-                take = 1 + next[ind+1];
-                }
-                cur[prev_ind+1] = max(take, not_take);
-            }
-            next = cur;
-        }
+        // space optimised code
         
-        return cur[-1+1];
+//         vector<int>next(n+1,0),cur(n+1,0);
+//         for(int ind = n-1; ind>=0;ind--){
+//             for(int prev_ind = ind-1; prev_ind>=-1;prev_ind--){
+//                 int not_take = 0; // not_take case
+//                 not_take = 0 + next[prev_ind+1];
+
+//                 int take = 0; // take case
+//                 if(prev_ind == -1 || nums[ind]>nums[prev_ind]){
+//                 take = 1 + next[ind+1];
+//                 }
+//                 cur[prev_ind+1] = max(take, not_take);
+//             }
+//             next = cur;
+//         }
+        
+//         return cur[-1+1];
+        
+        // different approach - TC = O(n^2)
+        int maxi = 1;
+        vector<int>dp(n,1);
+        for(int ind = 0; ind<n;ind++){
+            for(int prev_ind = 0; prev_ind<=ind-1;prev_ind++){
+                if(nums[prev_ind]<nums[ind]){
+                    dp[ind] = max(1+dp[prev_ind], dp[ind]);
+                }
+            }
+            maxi = max(maxi, dp[ind]);
+        }
+        return maxi;
     }
 };
