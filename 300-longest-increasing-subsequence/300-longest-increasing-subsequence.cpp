@@ -57,17 +57,38 @@ public:
         
 //         return cur[-1+1];
         
-        // different approach - TC = O(n^2)
-        int maxi = 1;
-        vector<int>dp(n,1);
-        for(int ind = 0; ind<n;ind++){
-            for(int prev_ind = 0; prev_ind<=ind-1;prev_ind++){
-                if(nums[prev_ind]<nums[ind]){
-                    dp[ind] = max(1+dp[prev_ind], dp[ind]);
+        // different approach - TC = O(n^2) and S.C. = O(n)
+        // This solution is required if we want to trace back the LIS (print the LIS).
+        // int maxi = 1;
+        // vector<int>dp(n,1);
+        // for(int ind = 0; ind<n;ind++){
+        //     for(int prev_ind = 0; prev_ind<=ind-1;prev_ind++){
+        //         if(nums[prev_ind]<nums[ind]){
+        //             dp[ind] = max(1+dp[prev_ind], dp[ind]);
+        //         }
+        //     }
+        //     maxi = max(maxi, dp[ind]);
+        // }
+        // return maxi;
+        
+        
+        
+        // n*logn solution
+        
+            vector<int>temp;
+            temp.push_back(nums[0]);
+            int len = 1;
+            for(int i=1;i<n;i++){
+                if(nums[i] > temp.back()){
+                    temp.push_back(nums[i]);
+                    len++;
+                }
+                else {
+                    auto ind = lower_bound(temp.begin(), temp.end(), nums[i] );
+                    cout<<*ind<<endl;
+                    *ind = nums[i];
                 }
             }
-            maxi = max(maxi, dp[ind]);
-        }
-        return maxi;
+            return len;
     }
 };
