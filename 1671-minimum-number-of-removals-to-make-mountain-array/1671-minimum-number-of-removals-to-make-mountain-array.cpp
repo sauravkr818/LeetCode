@@ -1,5 +1,9 @@
 class Solution {
 public:
+    
+    // LIS + some modification
+    // Problem similar to longest bitonic subsequence
+    // You can also use binary search way to find LIS which will make it run faster.
     int minimumMountainRemovals(vector<int>& arr) {
     
     int n = arr.size();
