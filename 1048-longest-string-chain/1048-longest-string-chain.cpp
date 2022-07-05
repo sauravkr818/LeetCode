@@ -1,49 +1,46 @@
 class Solution {
 public:
     
-    unordered_set<string>st;
     
-    static bool compare(const string &s1, const string &s2) {
-        return s1.length() > s2.length();
+bool compare(string &s1, string &s2){
+    if(s1.size() != s2.size() + 1) return false;
+    
+    int first = 0;
+    int second = 0;
+    while(first<s1.size()){
+        if(s1[first] == s2[second]){
+            first++;
+            second++;
+        }
+        else{
+            first++;
+        }
+    }
+    if(first == s1.size() && second == s2.size()) return true;
+    return false;
+}
+
+static bool sortBySize(string &s1, string &s2){
+    return s1.size()<s2.size();
+}
+
+int longestStrChain(vector<string> &arr)
+{
+    // Write your code here.
+    int n = arr.size();
+    vector<int>dp(n,1);
+    sort(arr.begin(), arr.end(), sortBySize);
+    int maxi = 0;
+    for(int i=0;i<n;i++){
+        for(int prev = 0; prev<i; prev++){
+            if(compare(arr[i], arr[prev]) && 1 + dp[prev]> dp[i]){
+                dp[i] = 1 + dp[prev];
+            }
+        }
+        maxi = max(maxi,dp[i]);
     }
     
-    int f(int i, string &s, vector<int>&dp){
-        
-        // base cases
-        
-        
-        if(i<0) return 0;
-        
-        if(dp[i] != -1) return dp[i];
-        
-        string temp = s;
-        temp.erase(i,1);
-        
-        int erase = 0;
-        
-        if(st.find(temp) != st.end()){
-            erase = 1 + f(temp.size()-1, temp,dp);
-        }
-        
-        int not_erase = 0 + f(i-1, s,dp);
-        
-        return dp[i] = max(erase,not_erase);
-        
-        }
+    return maxi;
     
-    int longestStrChain(vector<string>& words) {
-        if(words.size() == 5 && words[0] == "bdca" && words[4] == "a") return 4;
-        
-        for(string s: words){
-            st.insert(s);
-        }
-        sort(words.begin(), words.end(), compare);
-        int maxi = 0;
-        for(string s: words){
-            
-            vector<int>dp(s.size(),-1);
-            maxi = max(maxi,f(s.size()-1, s,dp));
-        }
-        return maxi+1;
-    }
+}
 };
