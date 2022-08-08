@@ -85,7 +85,7 @@ public:
                 }
                 else {
                     auto ind = lower_bound(temp.begin(), temp.end(), nums[i] );
-                    cout<<*ind<<endl;
+                    //cout<<*ind<<endl;
                     *ind = nums[i];
                 }
             }
