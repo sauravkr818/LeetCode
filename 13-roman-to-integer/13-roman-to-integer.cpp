@@ -10,7 +10,6 @@ public:
         mp['D'] = 500;
         mp['M'] = 1000;
         int sum = mp[s[0]];
-        int last = sum;
         for(int i=1;i<s.size();i++){
             if((s[i] == 'V' || s[i] == 'X') && s[i-1] == 'I'){
                 sum += mp[s[i]] - 2*mp[s[i-1]];
