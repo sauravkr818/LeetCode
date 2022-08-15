@@ -6,6 +6,8 @@ public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         unordered_set<string>st;
         bool isEndWordPresent = false;
+        
+        // if endWord is not present in the word list then return 0 because we can never reach end if endWord is not present
         for(auto word: wordList){
             if(endWord == word){
                 isEndWordPresent = true;
@@ -13,8 +15,12 @@ public:
             st.insert(word);
         }
         if(!isEndWordPresent) return 0;
+        
+        // BFS
         queue<string>q;
         q.push(beginWord);
+        // depth tells the number of nodes/words visited
+        // this question is basically finding the shortest path from source node to dest node.
         int depth = 0;
         int level = q.size();
         bool went = false;
@@ -45,6 +51,5 @@ public:
         }
         if(!went) return 0;
         return depth+1;
-        
     }
 };
