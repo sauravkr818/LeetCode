@@ -1,26 +1,29 @@
 class Solution {
 public:
+    
+    // similar to longest substr with k unique characters
+    
     int lengthOfLongestSubstring(string s) {
         int n = s.size();
         int i = 0, j = 0;
-        unordered_set<char>st;
         
-        int count = 0;
+        int ans = 0;
+        unordered_map<char,int>mp;
         while(j<n){
-            if(st.find(s[j]) == st.end()){
-                st.insert(s[j]);
+            mp[s[j]]++;
+            if(mp.size() == j-i+1){
+                ans = max(ans,j-i+1);
                 j++;
             }
-            else{
-                while(s[i] != s[j]){
-                    st.erase(s[i]);
+            else if(mp.size() < j-i+1){
+                while(mp.size()<j-i+1){
+                    mp[s[i]]--;
+                    if(mp[s[i]] == 0) mp.erase(s[i]);
                     i++;
                 }
-                st.erase(s[i]);
-                i++;
+                j++;
             }
-            count = max(count,j-i);
         }
-        return count;
+        return ans;
     }
 };
