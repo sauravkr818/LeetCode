@@ -40,10 +40,6 @@ public:
             j++;
             
         }
-        // string temp = s.substr(i,j-i+1);
-        // if((j-i+1<ans.size() && count == 0) || ans == ""){
-        //     ans = temp;
-        // }
         return ans;
         
     }
