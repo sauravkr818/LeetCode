@@ -19,6 +19,7 @@ public:
         ListNode* slow = head;
         ListNode* fast = head;
         int count = 0;
+        // find the middle of the linked list
         while(fast && fast->next){
             slow = slow->next;
             fast = fast->next->next;
@@ -26,6 +27,7 @@ public:
         }
         ListNode* temp = NULL;
         ListNode* save;
+        // reverse the other half of the liked list
         while(slow){
             ListNode* save2 = slow;
             if(slow->next == NULL) save = slow;
@@ -34,6 +36,8 @@ public:
             temp = save2;
             
         }
+        // Now check from starting head and ending save
+        // 1->2->null and null<-2<-1
         while(count--){
             if(head->val != save->val) return false;
             
