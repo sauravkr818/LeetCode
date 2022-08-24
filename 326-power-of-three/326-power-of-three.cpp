@@ -6,7 +6,6 @@ public:
             n /= 3;
             if(n == 0 || (n % 3 != 0 && n != 1)) return false;
         }
-        //cout<<n<<endl;
         return n == 1 ? true : false;
     }
 };
