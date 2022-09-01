@@ -11,9 +11,8 @@
  */
 class Solution {
 public:
-    int count = 0;
     
-    void f(TreeNode* root, int maxi){
+    void f(TreeNode* root, int maxi, int &count){
         if(root == NULL){
             return;
         }
@@ -21,13 +20,14 @@ public:
             count++;
             maxi = root->val;
         }
-        f(root->left,maxi);
-        f(root->right,maxi);
+        f(root->left,maxi,count);
+        f(root->right,maxi,count);
         
     }
     
     int goodNodes(TreeNode* root) {
-        f(root,INT_MIN);
+        int count = 0;
+        f(root,INT_MIN,count);
         return count;
     }
 };
