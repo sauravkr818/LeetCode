@@ -13,36 +13,21 @@ class Solution {
 public:
     int count = 0;
     
-    void f(TreeNode* root, stack<int>&st){
+    void f(TreeNode* root, int maxi){
         if(root == NULL){
             return;
         }
-        if(st.empty() == true){
-            st.push(root->val);
+        if(root->val>=maxi){
             count++;
+            maxi = root->val;
         }
-        else if(st.empty() == false && root->val>=st.top()){
-            st.push(root->val);
-            count++;
-        }
-        else if(st.empty() == false && root->val<st.top()){
-            st.push(st.top());
-        }
-        f(root->left,st);
-        
-        f(root->right,st);
-        
-        int t = st.top();
-        st.pop();
-        if(st.empty() == true){
-            st.push(t);
-        }
+        f(root->left,maxi);
+        f(root->right,maxi);
         
     }
     
     int goodNodes(TreeNode* root) {
-        stack<int>st;
-        f(root,st);
+        f(root,INT_MIN);
         return count;
     }
 };
