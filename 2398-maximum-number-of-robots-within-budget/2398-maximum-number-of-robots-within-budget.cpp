@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int maximumRobots(vector<int>& ct, vector<int>& rc, long long bgt) {
+        int i = 0, j = 0;
+        int n = ct.size();
+        priority_queue<pair<long long,int>>pq;
+        long long sum = 0;
+        long long gg = 0;
+        unordered_set<int>st;
+        long long count = 0;
+        while(j<n){
+            
+            pq.push({(long long)ct[j],j});
+            
+            gg += (long long)rc[j];
+            
+                
+            
+             
+        while(pq.empty() == false && (pq.top()).first + (long long)((j-i+1) * gg)>bgt && i<n){
+                    gg -= (long long)rc[i];
+                    
+                 if ((pq.top()).second <= i){
+                        pq.pop();
+                 }
+                     
+                    
+                    i++;
+                    
+                }
+               
+            count = max(count,(long long)j-i+1);
+            j++;
+        }
+        return (int)count;
+    }
+};
