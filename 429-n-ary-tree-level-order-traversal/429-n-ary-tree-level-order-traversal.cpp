@@ -20,6 +20,7 @@ public:
 
 class Solution {
 public:
+    // bfs
     vector<vector<int>> levelOrder(Node* root) {
         if(root == NULL) return {};
         vector<vector<int>>arr;
