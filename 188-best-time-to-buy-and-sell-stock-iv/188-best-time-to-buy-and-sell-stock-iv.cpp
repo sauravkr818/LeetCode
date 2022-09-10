@@ -1,12 +1,22 @@
 class Solution {
 public:
+    
+    // there are two soltution to this problem 
+    // I have solved using the first method where dp is of n*2*k size
+    // which also means I have declared 3D DP
+    
+    // Method 2 involves transactions Number which ranges from 0 to 2*k-1
+    // hence when k = 2 then there are 4 transaction numbers
+    // 0,1,2,3 where B,S,B,S is denoted by the numbers respectively
+    // When the number is even = buy and when the number is odd sell
+    // Therefore here we will declare a dp array of size dp[n+1][2k+1]
+    // Only 2D DP 
+    
     int maxProfit(int k, vector<int>& prices) {
+        
+        // tabulation written from buy and sell stock-(iii) recursion code
+        
         int n = prices.size();
-        //vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(3,-1)));
-        //return f(0,1,2,prices,n,dp);
-        
-        // tabulation
-        
         vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(k+1,0)));
         
         // bases cases return 0 but since we have initiallized our dp array to 0 hence we need not write base cases
