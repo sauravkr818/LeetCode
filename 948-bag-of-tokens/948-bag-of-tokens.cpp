@@ -3,7 +3,6 @@ public:
     int bagOfTokensScore(vector<int>& token, int power) {
         int n = token.size();
         if(n == 0) return 0;
-        //if(n == 1 && power>=token[0]) return 1;
         sort(token.begin(),token.end());
         if(token[0] > power) return 0;
         
