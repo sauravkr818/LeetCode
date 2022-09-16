@@ -2,7 +2,7 @@ class Solution {
 public:
     int f(int i,int k,vector<int>&nums,vector<int>&mul,vector<vector<int>>&dp){
         // base cases
-        if(i>=nums.size() || i>=mul.size() || k>=mul.size()) return 0;
+        if(k>=mul.size()) return 0;
         
         if(dp[i][k] != INT_MIN) return dp[i][k];
         
