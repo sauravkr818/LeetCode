@@ -44,17 +44,11 @@ public:
     }
     
     bool isEmpty() {
-        if(size > 0){
-            return false;
-        }
-        return true;
+        return (size == 0);
     }
     
     bool isFull() {
-        if(size >= maxi){
-            return true;
-        }
-        return false;
+        return (size == maxi);
     }
 };
 
