@@ -31,7 +31,10 @@ class Solution {
             adj[edges[i][0]].push_back({edges[i][1], edges[i][2]});
         }
         
-        // find the topo sort
+        // find the topo sort - O(N+M)
+        // Why topo sort - because we reach that node which comes first with no node it is dependent on means no edge dependent on
+        // And therefore with topo sort, we reach node on the basis of their reachibility. The node which have longer path to reach comes later
+        // and hence should be computer later
         for(int i=0;i<N;i++){
             if(!visited[i]){
                 dfs(i,adj,visited,st);
@@ -43,6 +46,7 @@ class Solution {
         int src = 0;
         dist[src] = 0;
         
+        // Time - O(N+M)
          while(st.empty() == false){
             int u = st.top();
             st.pop();
