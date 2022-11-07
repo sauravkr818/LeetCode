@@ -7,63 +7,57 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 class Solution {
-  public:
+  private:
   
-  void dfs(int u, vector<pair<int,int>>adj[], vector<bool>&vis, stack<int>&st){
-      vis[u] = true;
-      for(auto it: adj[u]){
-          if(!vis[it.first]){
-              dfs(it.first,adj,vis,st);
+  void topo(int node, vector<pair<int,int>>adj[], vector<int>&vis, stack<int>&st){
+      vis[node] = 1;
+      
+      for(auto it: adj[node]){
+          int temp = it.first;
+          if(!vis[temp]){
+              topo(temp,adj,vis,st);
           }
       }
-      st.push(u);
-      return;
+      st.push(node);
   }
-  
+  public:
      vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
         // code here
-        stack<int>st;
-        vector<bool>visited(N,0);
         vector<pair<int,int>>adj[N];
-        
-        // adj[] list
         for(int i=0;i<M;i++){
-            adj[edges[i][0]].push_back({edges[i][1], edges[i][2]});
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int wt = edges[i][2];
+            adj[u].push_back({v,wt});
         }
         
-        // find the topo sort - O(N+M)
-        // Why topo sort - because we reach that node which comes first with no node it is dependent on means no edge dependent on
-        // And therefore with topo sort, we reach node on the basis of their reachibility. The node which have longer path to reach comes later
-        // and hence should be computer later
+        stack<int>st;
+        vector<int>vis(N,0);
         for(int i=0;i<N;i++){
-            if(!visited[i]){
-                dfs(i,adj,visited,st);
+            if(!vis[i]){
+                topo(i,adj,vis,st);
             }
         }
         
-        vector<int>dist(N, 1e9);
-        
+        vector<int>dist(N,1e9);
         int src = 0;
         dist[src] = 0;
-        
-        // Time - O(N+M)
-         while(st.empty() == false){
-            int u = st.top();
+        while(!st.empty()){
+            int node = st.top();
             st.pop();
-            for(auto it: adj[u]){
-                if(dist[it.first]> dist[u]+ it.second){
-                    dist[it.first] = dist[u] + it.second;
+            for(auto it: adj[node]){
+                int v = it.first;
+                int wt = it.second;
+                if(dist[node]+wt<dist[v]){
+                    dist[v] = dist[node]+wt;
                 }
             }
         }
         
         for(int i=0;i<N;i++){
-            if(dist[i] == 1e9){
-                dist[i] = -1;
-            }
+            if(dist[i] == 1e9) dist[i] = -1;
         }
         return dist;
-        
     }
 };
 
