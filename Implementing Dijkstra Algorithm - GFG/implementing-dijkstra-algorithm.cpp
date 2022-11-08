@@ -63,6 +63,9 @@ class Solution
                 
                 if(dis + edgeWt< dist[adjNode]){
                     // erase if someone already visited the adjNode
+                    // this is the main use of set that is to remove the already modified node 
+                    //because I get a better option so no need to iterate on the not good option
+                    
                     if(dist[adjNode] != 1e9){
                         st.erase({dist[adjNode],adjNode});
                     }
