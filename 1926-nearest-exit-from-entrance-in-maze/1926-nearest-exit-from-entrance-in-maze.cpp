@@ -5,7 +5,6 @@ public:
         int m = maze[0].size();
         queue<pair<pair<int,int>,int>>q;
         q.push({{entrance[0],entrance[1]},0}); // {{row,col},steps}
-        vector<int>vis(n,0);
         int delrow[] = {-1,0,1,0};
         int delcol[] = {0,1,0,-1};
         
