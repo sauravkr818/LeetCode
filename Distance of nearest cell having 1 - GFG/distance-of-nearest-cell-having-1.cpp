@@ -32,6 +32,7 @@ class Solution
 	        q.pop();
 	        if(ans[row][col] == 0)
 	        ans[row][col] = step;
+	        else continue;
 	        for(int i=0;i<4;i++){
 	            int nrow = row + delrow[i];
 	            int ncol = col + delcol[i];
