@@ -25,6 +25,8 @@ public:
     vector<vector<char>> fill(int n, int m, vector<vector<char>> mat)
     {
         // code here
+        //logic - check all the 'O' at the boundaries and fron them keep track of that 'O's which are reachable from them.
+        // All those reachable 'O's should not be converted to X. Those who are not reachable menas they are surrounded.
         vector<vector<int>>vis(n,vector<int>(m,0));
         for(int i=0;i<m;i++){
             if(!vis[0][i]){
