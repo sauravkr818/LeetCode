@@ -5,57 +5,28 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-    
-    
+
     vector<int>delrow = {-1,0,1,0};
-    vector<int>delcol = {0,-1,0,1};
-        
-    void dfs(vector<vector<int>>& image, int row, int col, int newColor, int iniColor, int n, int m){
-        image[row][col] = newColor;
+    vector<int>delcol = {0,1,0,-1};
+    void dfs(vector<vector<int>>& img, int row, int col, int newColor,int initColor,vector<vector<int>>& ans) {
+        ans[row][col] = newColor;
         for(int i=0;i<4;i++){
             int nrow = row + delrow[i];
             int ncol = col + delcol[i];
-            if(nrow>=0 && nrow<n && ncol>=0 && ncol<m 
-            && image[nrow][ncol] == iniColor && image[nrow][ncol] != newColor){
-                dfs(image,nrow,ncol,newColor,iniColor,n,m);
+            if(nrow>=0 && nrow<img.size() && ncol>=0 && 
+            ncol<img[0].size() && img[nrow][ncol] == initColor && ans[nrow][ncol] != newColor){
+                
+                dfs(img,nrow,ncol,newColor,initColor,ans);
             }
         }
-        
     }
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+    vector<vector<int>> floodFill(vector<vector<int>>& img, int sr, int sc, int newColor) {
         // Code here
-        
-        // bfs way
-        // queue<pair<int,int>>q;
-        // q.push({sr,sc});
-        // int color = image[sr][sc];
-        // image[sr][sc] = newColor;
-        // int n = image.size();
-        // int m = image[0].size();
-        // vector<int>delrow = {-1,0,1,0};
-        // vector<int>delcol = {0,-1,0,1};
-        // while(!q.empty()){
-        //     int row = q.front().first;
-        //     int col = q.front().second;
-        //     q.pop();
-        //     for(int i=0;i<4;i++){
-        //         int nrow = row + delrow[i];
-        //         int ncol = col + delcol[i];
-        //         if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && image[nrow][ncol] == color && image[nrow][ncol] != newColor){
-        //             image[nrow][ncol] = newColor;
-        //             q.push({nrow,ncol});
-        //         }
-        //     }
-        // }
-        // return image;
-        
-        
-        // dfs code
-        int iniColor = image[sr][sc];
-        int n = image.size();
-        int m = image[0].size();
-        dfs(image,sr,sc,newColor, iniColor,n,m);
-        return image;
+        int initColor = img[sr][sc];
+        //img[sr][sc] = newColor;
+        vector<vector<int>>ans = img;
+        dfs(img,sr,sc,newColor,initColor,ans);
+        return ans;
         
     }
 };
