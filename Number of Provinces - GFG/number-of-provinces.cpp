@@ -7,35 +7,37 @@ using namespace std;
 //User function Template for C++
 
 class Solution {
-    private:
-    void dfs(int node, vector<int>adj[], vector<bool>&vis){
-        vis[node] = true;
-        for(auto it: adj[node]){
+  public:
+  
+    void dfs(int i, vector<int>adj[], vector<int>&vis){
+        // base case
+        vis[i] = 1;
+        for(auto it: adj[i]){
             if(!vis[it]){
                 dfs(it,adj,vis);
             }
         }
+        
     }
-    
-  public:
-  
     int numProvinces(vector<vector<int>> adj, int V) {
         // code here
-        vector<int>adjL[V];
-        for(int i=0;i<V;i++){
-            for(int j=0;j<V;j++){
-                if(adj[i][j] == 1 && i != j){
-                    adjL[i].push_back(j);
-                    adjL[j].push_back(i);
+        int n = adj.size(), m = adj[0].size();
+        int count = 0;
+        vector<int>vis(V,0);
+        vector<int>Adj[V];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i != j && adj[i][j] == 1){
+                    Adj[i].push_back(j);
+                    Adj[j].push_back(i);
                 }
             }
         }
-        vector<bool>vis(V,false);
-        int count = 0;
+        
         for(int i=0;i<V;i++){
             if(!vis[i]){
                 count++;
-                dfs(i,adjL,vis);
+                dfs(i,Adj,vis);
             }
         }
         return count;
